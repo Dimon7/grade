@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>MyGradeBook</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+</head>
+<div class="container">
+    <div class="page-header">
+        <h1>Meine kleine Notenverwaltung</h1>
+    </div>
+
+    <table th:if="${listOfGrades != null}" class="table table-hover table-bordered table-fixed">
+        <thead>
+        <tr>
+            <th class="col-md-4">Lecture</th>
+            <th class="col-md-4">Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="grade : ${listOfGrades}">
+            <td th:text="${grade.lecture}">keine LV</td>
+            <td th:text="${grade.grade}">keine Note></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1 data-th-text="${average}">Notendurchshnitt:</h1>
+
+    <div>
+        <h4>Noten eintragen:</h4>
+        <form th:action="@{add}" method="post">
+            <div class="form-group">
+                Vorlesung:
+                <input class="form-control" type="text" name="lecture" maxlength="255"/>
+                <br/>
+                Note:
+                <input class="form-control" type="text" name="grade" maxlength="255"/>
+                <br/>
+
+                <input type="submit" class="btn btn-primary btn-sm" value="und los damit"/>
+            </div>
+        </form>
+    </div>
+</div>
+</html>
